@@ -28,7 +28,7 @@ $(1)/%.o: %.cpp
 endef
 
 HuntTheWumpus: $(OBJ) directories HuntTheWumpusLib
-	g++ -L../HuntTheWumpusLib $(OBJ) -o ../bin/HuntTheWumpus -lHuntTheWumpus
+	$(CC) -L../HuntTheWumpusLib $(OBJ) -o ../bin/HuntTheWumpus -lHuntTheWumpus
 
 HuntTheWumpusLib:
 	$(MAKE) -j -C ../HuntTheWumpusLib all
