@@ -4,6 +4,10 @@
 
 #include "Cave.h"
 
+#include "Bat.h"
+#include "Pit.h"
+#include "Wumpus.h"
+
 #include "TestHelperTestEnvironment.h"
 
 namespace TestHuntTheWumpus
@@ -28,6 +32,18 @@ namespace TestHuntTheWumpus
         // Verify Hunter in separate cave.
         const auto cave6 = dungeon.FindCave(6);
         CHECK(cave6->HasDenizen({ HuntTheWumpus::Category::Hunter, 0 }));
+    }
+
+    TEST(DungeonSuite, TestDenizenPriorities)
+    {
+        TestEnvironment env;
+
+        HuntTheWumpus::Bat  bat(0, env.m_context);
+        HuntTheWumpus::Pit  pit(0, env.m_context);
+        HuntTheWumpus::Wumpus wumpus(0, env.m_context);
+
+        CHECK(bat.GetPriority() > pit.GetPriority());
+        CHECK(pit.GetPriority() > wumpus.GetPriority());
     }
 
     TEST(DungeonSuite, Dungeon_MoveRequest_LegalMoveIsProper)
